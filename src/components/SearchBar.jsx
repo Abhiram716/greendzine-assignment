@@ -4,11 +4,7 @@ import React from "react";
 
 const SearchBar = () => {
   return (
-    <Box
-      width={"1000px"}
-      marginTop={"50px"}
-      textAlign="center"
-    >
+    <Box sx={{ width: 900, mt: 20, textAlign: "center" }}>
       <TextField
         fullWidth
         label="Search"

@@ -10,7 +10,6 @@ function App() {
         justifyContent: "center",
         flexDirection: "column",
         alignItems: "center",
-        bgcolor: "pink",
       }}
     >
       <Box sx={{ display: "flex", justifyContent: "center" }}>
