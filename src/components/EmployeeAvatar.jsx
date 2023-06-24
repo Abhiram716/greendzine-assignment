@@ -1,48 +1,43 @@
-import InfoIcon from "@mui/icons-material/Info";
-import {
-  Avatar,
-  Badge,
-  Box,
-  ImageList,
-  ImageListItem,
-  ImageListItemBar,
-} from "@mui/material";
-import IconButton from "@mui/material/IconButton";
-import { styled } from "@mui/material/styles";
+import { Avatar, Badge, Box, Grid, Typography } from "@mui/material";
 import React from "react";
 
 const EmployeeAvatar = ({ employees }) => {
   return (
-    <Box>
-      <ImageList sx={{ width: 500, height: 500 }}>
-        {employees.map((employee) => {
-          return (
-            <Box>
-              <ImageListItem>
+    <Grid container spacing={1} >
+      {employees.map((employee) => (
+        <Grid item xs={12} sm={6} md={4} key={employee.id}>
+          <Box display="flex" flexDirection="column" alignItems="center">
+            <Badge
+              badgeContent={
+                <Typography variant="caption">{employee.id}</Typography>
+              }
+              color="primary"
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: 140,
+                  height: 140,
+                  border: "1px solid grey",
+                  borderRadius: 4,
+                  position: "relative",
+                }}
+              >
                 <Avatar
                   src={employee.avatar}
-                  sx={{ height: 150, width: 200, borderRadius: 4 }}
-                  variant={"square"}
+                  alt={employee.firstName}
+                  variant="square"
+                  sx={{ width: 120, height: 120, borderRadius: 4 }}
                 />
-                <ImageListItemBar
-                  sx={{ width: 200, borderRadius: "0px  0px 20px 20px" }}
-                  title={employee.first_name}
-                  subtitle={employee.email}
-                  actionIcon={
-                    <IconButton
-                      sx={{ color: "rgba(255, 255, 255, 0.54)" }}
-                      aria-label={`info about ${employee.first_name} ${employee.last_name}`}
-                    >
-                      <InfoIcon />
-                    </IconButton>
-                  }
-                />
-              </ImageListItem>
-            </Box>
-          );
-        })}
-      </ImageList>
-    </Box>
+              </Box>
+            </Badge>
+            <Typography variant="body1">{employee.first_name}</Typography>
+          </Box>
+        </Grid>
+      ))}
+    </Grid>
   );
 };
 
