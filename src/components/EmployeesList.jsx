@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import EmployeeAvatar from "./EmployeeAvatar";
 import Spinner from "./Spinner";
 
-const EmployeesList = () => {
+const EmployeesList = ({ searchQuery }) => {
   const [employees, setEmployees] = useState([]);
   const [fetchStatus, setFetchStatus] = useState("pending");
+ 
   const fetchData = async () => {
     setTimeout(async () => {
       const res = await fetch("https://reqres.in/api/users?page=2");
@@ -14,6 +15,10 @@ const EmployeesList = () => {
       setFetchStatus("success");
     }, 2000);
   };
+
+  const filteredEmployees = employees.filter((employee) =>
+    employee.first_name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   useEffect(() => {
     fetchData();
@@ -28,7 +33,7 @@ const EmployeesList = () => {
   } else {
     return (
       <Box sx={{ mt: 4 }}>
-        <EmployeeAvatar employees={employees} />
+        <EmployeeAvatar employees={filteredEmployees} />
       </Box>
     );
   }
