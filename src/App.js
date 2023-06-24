@@ -12,7 +12,9 @@ function App() {
         alignItems: "center",
       }}
     >
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
+      <Box
+        sx={{ display: "flex", justifyContent: "center" }}
+      >
         <SearchBar />
       </Box>
       <EmployeesList />
