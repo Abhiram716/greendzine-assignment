@@ -1,11 +1,12 @@
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import EmployeeAvatar from "./EmployeeAvatar";
 import Spinner from "./Spinner";
 
-const EmployeesList = () => {
+const EmployeesList = ({ searchQuery }) => {
   const [employees, setEmployees] = useState([]);
   const [fetchStatus, setFetchStatus] = useState("pending");
+ 
   const fetchData = async () => {
     setTimeout(async () => {
       const res = await fetch("https://reqres.in/api/users?page=2");
@@ -14,6 +15,10 @@ const EmployeesList = () => {
       setFetchStatus("success");
     }, 2000);
   };
+
+  const filteredEmployees = employees.filter((employee) =>
+    employee.first_name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   useEffect(() => {
     fetchData();
@@ -27,23 +32,8 @@ const EmployeesList = () => {
     );
   } else {
     return (
-      <Box sx={{ mt: 20,ml:9 }}>
-        <Grid
-          container
-          direction="row"
-          alignItems="center"
-          justifyContent="center"
-          rowSpacing={3}
-          columnGap={1}
-        >
-          {employees.map((employee) => {
-            return (
-              <Grid item xs={3} key={employee.id}>
-                <EmployeeAvatar employeedata={employee} />
-              </Grid>
-            );
-          })}
-        </Grid>
+      <Box sx={{ mt: 4 }}>
+        <EmployeeAvatar employees={filteredEmployees} />
       </Box>
     );
   }
