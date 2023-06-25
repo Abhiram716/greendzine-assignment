@@ -4,7 +4,21 @@ import React from "react";
 
 const SearchBar = ({ searchQuery, handleSearchQueryChange }) => {
   return (
-    <Box sx={{ width: 700, mt: 20, textAlign: "center" }}>
+    <Box
+      sx={{
+        width: 700,
+        mt: 20,
+        textAlign: "center",
+        "@media (max-width: 800px)": {
+          // Adjust width for screens with a maximum width of 600px
+          width: "90%",
+        },
+        "@media (max-width: 400px)": {
+          // Adjust width for screens with a maximum width of 400px
+          width: "90%",
+        },
+      }}
+    >
       <TextField
         fullWidth
         label="Search"
